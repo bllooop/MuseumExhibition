@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.museumrouteapp.Domain.Model.Route;
+import com.example.museumrouteapp.MainActivity;
 import com.example.museumrouteapp.Presentation.View.Adapters.RouteListAdapter;
 import com.example.museumrouteapp.Presentation.ViewModel.RouteListViewModel;
 import com.example.museumrouteapp.R;
@@ -38,11 +39,13 @@ public class RouteList extends Fragment {
         mBinding = RouteListFragmentBinding.inflate(getLayoutInflater(), container, false);
 
         mBinding.routeListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.fab.setImageResource(R.drawable.add);
+
 
         mBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_partyList_to_addParty);
+                Navigation.findNavController(v).navigate(R.id.action_routeList_to_addRoute);
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

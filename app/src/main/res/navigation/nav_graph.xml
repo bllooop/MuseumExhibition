@@ -11,7 +11,7 @@
         android:label="party_list_fragment"
         tools:layout="@layout/route_list_fragment" >
         <action
-            android:id="@+id/action_partyList_to_addParty"
+            android:id="@+id/action_routeList_to_addRoute"
             app:destination="@id/addParty" />
     </fragment>
     <fragment

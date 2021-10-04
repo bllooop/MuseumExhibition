@@ -5,14 +5,13 @@ import androidx.lifecycle.ViewModel;
 import com.example.museumrouteapp.Domain.Model.Route;
 
 public class RouteViewModel extends ViewModel {
-
-    private Route nRoute;
+    private Route mRoute;
 
     public Route getRoute() {
-        return nRoute;
+        return mRoute;
     }
 
-    public void setRoute(Route route) {
-        nRoute = Route;
+    public void setRoute(Route Route) {
+        mRoute = Route;
     }
 }

@@ -12,8 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.museumrouteapp.DI.ServiceLocator;
 import com.example.museumrouteapp.Domain.Model.Route;
 import com.example.museumrouteapp.MainActivity;
+import com.example.museumrouteapp.Presentation.View.Adapters.ImageSliderAdapter;
 import com.example.museumrouteapp.Presentation.ViewModel.RouteViewModel;
 import com.example.museumrouteapp.R;
 import com.example.museumrouteapp.databinding.RouteFragmentBinding;
@@ -23,8 +25,8 @@ public class RouteFragment extends Fragment {
     private RouteViewModel mViewModel;
     private RouteFragmentBinding mBinding;
 
-    public static AddRoute.RouteFragment newInstance() {
-        return new AddRoute.RouteFragment();
+    public static RouteFragment newInstance() {
+        return new RouteFragment();
     }
 
     @Override
@@ -45,13 +47,13 @@ public class RouteFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         mBinding = RouteFragmentBinding.inflate(inflater, container, false);
 
-        mBinding.fab.setImageResource(R.drawable.share);
+        ((MainActivity) getActivity()).mBinding.fab.setImageResource(R.drawable.share);
 
-        ((MainActivity) getActivity()).setSupportActionBar(mBinding.toolbar);
+       /* ((MainActivity) getActivity()).setSupportActionBar(mBinding.toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mBinding.toolbar.setNavigationOnClickListener((View v) -> {
+        mBinding.partyName.setNavigationOnClickListener((View v) -> {
             Navigation.findNavController(v).popBackStack();
-        });
+        }); */
 
         if (mViewModel.getRoute() != null) {
             ((MainActivity) getActivity()).mBinding.fab.setOnClickListener((View v) -> {
@@ -64,8 +66,8 @@ public class RouteFragment extends Fragment {
                 startActivity(shareIntent);
             });
 
-            mBinding.imageSlider.setAdapter(new ImageSliderAdapter(mViewModel.getPagetRouterty().getImages(), false, ((MainActivity) requireActivity())));
-            mBinding.toolbarLayout.setTitle(mViewModel.getRoute().getName());
+            mBinding.imageSlider.setAdapter(new ImageSliderAdapter(mViewModel.getRoute().getImages(), false, ((MainActivity) requireActivity())));
+            mBinding.partyName.setText(mViewModel.getRoute().getName());
             mBinding.partyDescription.setText(mViewModel.getRoute().getDescription());
 
         }

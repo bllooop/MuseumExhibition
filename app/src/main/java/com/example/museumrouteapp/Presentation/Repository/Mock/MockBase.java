@@ -1,8 +1,10 @@
 package com.example.museumrouteapp.Presentation.Repository.Mock;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.museumrouteapp.Domain.Model.Route;
+import com.example.museumrouteapp.Presentation.Repository.Model.RouteDTO;
 import com.example.museumrouteapp.Presentation.Repository.RepositoryTasks;
 
 import java.util.ArrayList;
@@ -37,4 +39,20 @@ public class MockBase implements RepositoryTasks {//
 
         data.setValue(list);
     }
+
+    @Override
+    public MutableLiveData<Route> findRoute(String id, LifecycleOwner owner) {
+        MutableLiveData<Route> specificRoute = new MutableLiveData<>();
+
+        data.observe(owner, (List<Route> routes) -> {
+            specificRoute.setValue(routes.stream()
+                    .filter(route -> id.equals(route.getId()))
+                    .findAny()
+                    .orElse(null)
+            );
+        });
+
+        return specificRoute;
+    }
+
 }

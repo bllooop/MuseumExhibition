@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.museumrouteapp.Domain.Model.Route;
 import com.example.museumrouteapp.MainActivity;
@@ -39,13 +40,13 @@ public class RouteList extends Fragment {
         mBinding = RouteListFragmentBinding.inflate(getLayoutInflater(), container, false);
 
         mBinding.routeListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.fab.setImageResource(R.drawable.add);
+        ((MainActivity) getActivity()).mBinding.fab.setImageResource(R.drawable.add);
 
 
-        mBinding.fab.setOnClickListener(new View.OnClickListener() {
+        ((MainActivity) getActivity()).mBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_routeList_to_addRoute);
+               Navigation.findNavController(((MainActivity) getActivity()).mBinding.navHostFragment).navigate(R.id.action_routeList_to_addRoute);
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -71,7 +72,7 @@ public class RouteList extends Fragment {
         mViewModel = new ViewModelProvider(this).get(RouteListViewModel.class);
 
         mViewModel.getRouteList().observe(getViewLifecycleOwner(), (List<Route> routeList) -> {
-            mBinding.routeListRecycler.setAdapter(new RouteListAdapter(routeList));
+            mBinding.routeListRecycler.setAdapter(new RouteListAdapter(routeList, (MainActivity) requireActivity()));
         });
     }
 

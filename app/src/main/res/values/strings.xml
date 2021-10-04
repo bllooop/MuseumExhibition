@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Museum Exhibition</string>
+    <string name="more">Подробнее...</string>
+    <string name="val">Количество</string>
+    <string name="enter_description">Введите описание мероприятия</string>
+    <string name="enter_party_name">Введите название мероприятия*</string>
+    <string name="add_party">Добавить новое мероприятие</string>
+    <string name="party_images">Фотографии мероприятия</string>
+    <string name="description">Описание:</string>
 </resources>

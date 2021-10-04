@@ -5,7 +5,7 @@ import com.example.museumrouteapp.Domain.Model.Route;
 import java.util.List;
 
 public class RouteOperations {
-    public static Route addParty(String name,
+    public static Route addRoute(String name,
                                  String description,
                                  List<String> images) {
         Route route = new Route();

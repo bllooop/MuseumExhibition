@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.museumrouteapp.DI.ServiceLocator;
 import com.example.museumrouteapp.Domain.Model.Route;
 import com.example.museumrouteapp.MainActivity;
 import com.example.museumrouteapp.R;
@@ -37,17 +38,17 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.Rout
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull PartyViewHolder holder, int position) {
-        holder.binding.partyCard.setOnClickListener((View v) -> {
+    public void onBindViewHolder(@NonNull @NotNull RouteViewHolder holder, int position) {
+        holder.binding.routeCard.setOnClickListener((View v) -> {
             Bundle bundle = new Bundle();
             String json = ServiceLocator.getInstance().getGson().toJson(data.get(position));
             bundle.putString("Route", json);
 
             Navigation.findNavController(mActivity.mBinding.navHostFragment)
-                    .navigate(R.id.action_partyList_to_partyFragment, bundle);
+                    .navigate(R.id.action_routeList_to_routeFragment, bundle);
         });
 
-        holder.binding.partyName.setText(data.get(position).getName());
+        holder.binding.routeName.setText(data.get(position).getName());
 
 
 

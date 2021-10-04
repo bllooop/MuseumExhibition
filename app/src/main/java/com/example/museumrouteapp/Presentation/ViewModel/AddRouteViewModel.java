@@ -2,6 +2,7 @@ package com.example.museumrouteapp.Presentation.ViewModel;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.museumrouteapp.DI.ServiceLocator;
 import com.example.museumrouteapp.Domain.Model.Operations.RouteOperations;
 import com.example.museumrouteapp.Domain.Model.Route;
 import com.example.museumrouteapp.Presentation.Repository.Model.RouteDTO;
@@ -19,6 +20,6 @@ public class AddRouteViewModel extends ViewModel {
                 images.stream().filter(Objects::nonNull).collect(Collectors.toList())
         );
 
-        ServiceLocator.getInstance().getRepository().addParty(route);
+        ServiceLocator.getInstance().getRepository().addRoute(route);
     }
 }

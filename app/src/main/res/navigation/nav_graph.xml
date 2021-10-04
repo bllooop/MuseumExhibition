@@ -8,15 +8,27 @@
     <fragment
         android:id="@+id/routeList"
         android:name="com.example.museumrouteapp.Presentation.View.RouteList"
-        android:label="party_list_fragment"
+        android:label="route_list_fragment"
         tools:layout="@layout/route_list_fragment" >
         <action
             android:id="@+id/action_routeList_to_addRoute"
-            app:destination="@id/addParty" />
+            app:destination="@id/addRoute" />
+        <action
+            android:id="@+id/action_routeList_to_routeFragment"
+            app:destination="@id/routeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/addParty"
+            android:id="@+id/addRoute"
         android:name="com.example.museumrouteapp.Presentation.View.AddRoute"
-        android:label="add_party_fragment"
+        android:label="add_route_fragment"
         tools:layout="@layout/add_route_fragment" />
+    <fragment
+        android:id="@+id/routeFragment"
+        android:name="com.example.museumrouteapp.Presentation.View.RouteFragment"
+        android:label="party_fragment"
+        tools:layout="@layout/route_fragment" />
 </navigation>

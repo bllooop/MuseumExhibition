@@ -19,10 +19,10 @@ public class MockBase implements RepositoryTasks {//
 
     public MockBase() {
         list = new ArrayList<>();
-        Route route1 = new Route("Экспозиция земноводных", "экспонаты земноводных");
-        list.add(route1);
+        Route route1 = new Route("Экспозиция земноводныss", "экспонаты земноводных");
+        //list.add(route1);
         Route route2 = new Route("Экспонаты млекопитающихся", "экспонаты млекопитающихся");
-        list.add(route2);
+        //list.add(route2);
 
         data = new MutableLiveData<>(list);
     }

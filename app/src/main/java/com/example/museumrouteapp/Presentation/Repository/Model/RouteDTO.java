@@ -12,16 +12,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Entity(tableName = "route")
+@Entity(tableName = "route", primaryKeys = {"id"})
 public class RouteDTO extends Route {
-    @PrimaryKey(autoGenerate = true)
-    @NotNull
     @ColumnInfo
-    public int id;
-    @TypeConverters({ImagesConverter.class})
-    public List<String> imagesDTO;
+   // @TypeConverters({ImagesConverter.class})
+    public String imagesDTO;
 
-    /*public String getImagesDTO() {
+    public String getImagesDTO() {
         return imagesDTO;
     }
 
@@ -44,13 +41,12 @@ public class RouteDTO extends Route {
         super.setImages(images);
         this.imagesDTO = new Gson().toJson(images);
     }
-*/
+
     public static RouteDTO convertFromRoute(Route route) {
         RouteDTO dto = new RouteDTO();
         dto.setImages(route.getImages());
         dto.setName(route.getName());
         dto.setDescription(route.getDescription());
-        dto.setId(route.getId());
         return dto;
     }
 

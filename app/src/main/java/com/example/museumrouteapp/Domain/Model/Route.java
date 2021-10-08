@@ -16,9 +16,10 @@ public class Route {
     public String description;
    @TypeConverters({ImagesConverter.class})
     private List<String> images;
+   @NotNull
     private String id;
 
-    public Route() {}
+    public Route() {id = UUID.randomUUID().toString();}
     public Route(String name, String description) {
         this.name = name;
         id = UUID.randomUUID().toString();

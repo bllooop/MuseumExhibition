@@ -1,6 +1,5 @@
 package com.example.museumrouteapp.Presentation.View.Adapters;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,10 @@ import com.example.museumrouteapp.databinding.RouteListElementBinding;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+
 
 public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.RouteViewHolder> {
     private List<Route> data;
@@ -42,14 +44,13 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.Rout
         holder.binding.routeCard.setOnClickListener((View v) -> {
             Bundle bundle = new Bundle();
             String json = ServiceLocator.getInstance().getGson().toJson(data.get(position));
-            bundle.putString("Route", json);
+            bundle.putString("Party", json);
 
             Navigation.findNavController(mActivity.mBinding.navHostFragment)
                     .navigate(R.id.action_routeList_to_routeFragment, bundle);
         });
 
         holder.binding.routeName.setText(data.get(position).getName());
-
 
 
 
@@ -60,7 +61,6 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.Rout
             holder.binding.imageSlider.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public int getItemCount() {

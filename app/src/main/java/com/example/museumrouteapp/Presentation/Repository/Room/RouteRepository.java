@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RouteRepository implements RepositoryTasks {
     private RouteListDAO mRouteListDao;
-    private LiveData<List<RouteDTO>> mAllRoute = new MutableLiveData<>();
+    private LiveData<List<RouteDTO>> mAllRoute;
 
     public RouteRepository(Application application) {
         RouteRoomDatabase db = RouteRoomDatabase.getDatabase(application);

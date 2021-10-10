@@ -46,8 +46,8 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.Rout
             String json = ServiceLocator.getInstance().getGson().toJson(data.get(position));
             bundle.putString("Party", json);
 
-            Navigation.findNavController(mActivity.mBinding.navHostFragment)
-                    .navigate(R.id.action_routeList_to_routeFragment, bundle);
+            //Navigation.findNavController(mActivity.mBinding.navHostFragment)
+              //      .navigate(R.id.action_routeList_to_routeFragment, bundle);
         });
 
         holder.binding.routeName.setText(data.get(position).getName());

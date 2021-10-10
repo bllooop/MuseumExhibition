@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ import com.example.museumrouteapp.Presentation.View.Adapters.RouteListAdapter;
 import com.example.museumrouteapp.Presentation.ViewModel.RouteListViewModel;
 import com.example.museumrouteapp.R;
 import com.example.museumrouteapp.databinding.RouteListFragmentBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -44,6 +48,20 @@ public class RouteList extends Fragment {
         ((MainActivity) getActivity()).mBinding.fab.setOnClickListener((View v) -> {
             Navigation.findNavController(((MainActivity) getActivity()).mBinding.navHostFragment).navigate(R.id.action_routeList_to_addRoute);
         });
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull
+                    RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                mViewModel.deleteRoute(((RouteListAdapter)
+                        mBinding.routeListRecycler.getAdapter()).getData().get(position));
+            }
+        }).attachToRecyclerView(mBinding.routeListRecycler);
 
         return mBinding.getRoot();
     }

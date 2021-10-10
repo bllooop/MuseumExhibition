@@ -27,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
             String id = parts[parts.length - 1];
             ServiceLocator.getInstance().getRepository().findRoute(id, this).observe(this, (Route route) -> {
                 if (route != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Route", ServiceLocator.getInstance().getGson().toJson(route));
+                   // Bundle bundle = new Bundle();
+                    //bundle.putString("Route", ServiceLocator.getInstance().getGson().toJson(route));
                     Navigation.findNavController(mBinding.navHostFragment).navigate(
-                            R.id.action_routeList_to_routeFragment,
-                            bundle
+                            R.id.action_routeList_to_routeFragment
+                            //bundle
                     );
                 }
             });

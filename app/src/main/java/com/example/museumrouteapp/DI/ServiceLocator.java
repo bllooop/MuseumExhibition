@@ -26,27 +26,9 @@ public class ServiceLocator {
         return instance;
     }
 
-    private Gson mGson;
     private RepositoryTasks mRepository;
 
-    public Gson getGson() {
-        if (mGson == null) {
-            mGson = new GsonBuilder()
-                    .registerTypeAdapter(
-                            LocalDateTime.class,
-                            (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> LocalDateTime.parse(
-                                    json.getAsString(),
-                                    DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-                            )
-                    )
-                    .registerTypeAdapter(
-                            LocalDateTime.class,
-                            (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) -> new JsonPrimitive(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").format(src))
-                    )
-                    .create();
-        }
-        return mGson;
-    }
+
 
     public void initBase(Application app) {
         if (mRepository == null) {

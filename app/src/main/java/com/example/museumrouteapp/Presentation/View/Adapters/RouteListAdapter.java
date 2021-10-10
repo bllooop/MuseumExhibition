@@ -41,17 +41,10 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.Rout
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RouteViewHolder holder, int position) {
-        holder.binding.routeCard.setOnClickListener((View v) -> {
-            Bundle bundle = new Bundle();
-            String json = ServiceLocator.getInstance().getGson().toJson(data.get(position));
-            bundle.putString("Party", json);
 
-            //Navigation.findNavController(mActivity.mBinding.navHostFragment)
-              //      .navigate(R.id.action_routeList_to_routeFragment, bundle);
-        });
 
         holder.binding.routeName.setText(data.get(position).getName());
-
+        holder.binding.routeDescription.setText(data.get(position).getName());
 
 
         if (data.get(position).getImages() != null && !data.get(position).getImages().isEmpty()) {

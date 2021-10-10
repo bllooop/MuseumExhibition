@@ -22,6 +22,7 @@ import com.example.museumrouteapp.Presentation.View.Adapters.RouteListAdapter;
 import com.example.museumrouteapp.Presentation.ViewModel.RouteListViewModel;
 import com.example.museumrouteapp.R;
 import com.example.museumrouteapp.databinding.RouteListFragmentBinding;
+import com.example.museumrouteapp.DI.ServiceLocator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,10 +47,11 @@ public class RouteList extends Fragment {
 
         ((MainActivity) getActivity()).mBinding.fab.setImageResource(R.drawable.add);
         ((MainActivity) getActivity()).mBinding.fab.setOnClickListener((View v) -> {
-            Navigation.findNavController(((MainActivity) getActivity()).mBinding.navHostFragment).navigate(R.id.action_routeList_to_addRoute);
+            Navigation.findNavController(((MainActivity) getActivity()).mBinding.navHostFragment)
+                    .navigate(R.id.action_routeList_to_addRoute);
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
+           @Override
             public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull
                     RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
                 return false;
@@ -62,7 +64,6 @@ public class RouteList extends Fragment {
                         mBinding.routeListRecycler.getAdapter()).getData().get(position));
             }
         }).attachToRecyclerView(mBinding.routeListRecycler);
-
         return mBinding.getRoot();
     }
 
@@ -72,7 +73,8 @@ public class RouteList extends Fragment {
         mViewModel = new ViewModelProvider(this).get(RouteListViewModel.class);
 
         mViewModel.getRouteList().observe(getViewLifecycleOwner(), (List<Route> routeList) -> {
-            mBinding.routeListRecycler.setAdapter(new RouteListAdapter(routeList, ((MainActivity) requireActivity())));
+            mBinding.routeListRecycler
+                    .setAdapter(new RouteListAdapter(routeList, ((MainActivity) requireActivity())));
         });
     }
 

@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginVertical="@dimen/normalMargin"
-                android:hint="Добавьте название экскурсионного маршрута"
+                android:hint="Добавьте название маршрута"
 
                 android:textSize="20sp"
                 android:autofillHints="@string/enter_party_name"

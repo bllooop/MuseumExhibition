@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Entity(tableName = "route", primaryKeys = {"id"})
+@Entity(tableName = "route", primaryKeys = {"id"}, ignoredColumns = {"images"})
 public class RouteDTO extends Route {
     @ColumnInfo
    // @TypeConverters({ImagesConverter.class})

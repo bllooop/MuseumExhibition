@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Route {
     public String name;
@@ -17,12 +18,12 @@ public class Route {
    @TypeConverters({ImagesConverter.class})
     private List<String> images;
    @NotNull
-    private String id;
-
-    public Route() {id = UUID.randomUUID().toString();}
+    private int id;
+    private static final AtomicInteger count = new AtomicInteger(0);
+    public Route() { id = count.incrementAndGet();}
     public Route(String name, String description) {
         this.name = name;
-        id = UUID.randomUUID().toString();
+        id = count.incrementAndGet();
         images = new ArrayList<>();
 
         this.description = description;
@@ -42,11 +43,11 @@ public class Route {
     }
     public List<String> getImages() { return images; }
     public void setImages(List<String> images) { this.images = images; }
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(@NotNull String id) {
+    public void setId(@NotNull int id) {
         this.id = id;
     }
 

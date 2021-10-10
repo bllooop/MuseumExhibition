@@ -36,7 +36,6 @@ public class MockBase implements RepositoryTasks {//
     @Override
     public <T extends Route> void deleteRoute(T route) {
         list.remove(route);
-
         data.setValue(list);
     }
 

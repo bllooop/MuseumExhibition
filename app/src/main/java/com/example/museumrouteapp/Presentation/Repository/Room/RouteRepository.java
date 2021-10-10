@@ -47,9 +47,9 @@ public class RouteRepository implements RepositoryTasks {
     public MutableLiveData<RouteDTO> findRoute(String id, LifecycleOwner owner) {
         MutableLiveData<RouteDTO> specificRoute = new MutableLiveData<>();
 
-        mAllRoute.observe(owner, (List<RouteDTO> parties) -> {
-            specificRoute.setValue(parties.stream()
-                    .filter(partyDTO -> id.equals(partyDTO.getId()))
+        mAllRoute.observe(owner, (List<RouteDTO> routes) -> {
+            specificRoute.setValue(routes.stream()
+                    .filter(routeDTO -> id.equals(routeDTO.getId()))
                     .findAny()
                     .orElse(null)
             );

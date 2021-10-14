@@ -8,5 +8,6 @@
     <color name="secondaryDark">#065554</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bottomview">#D6F3FF</color>
     <color name="background_secondary">#99ABEFE9</color>
 </resources>

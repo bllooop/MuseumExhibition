@@ -20,10 +20,11 @@ public class Route {
    @NotNull
     private int id;
     private static final AtomicInteger count = new AtomicInteger(0);
-    public Route() { id = count.incrementAndGet();}
+    public Route() {
+        id = count.incrementAndGet();
+    }
     public Route(String name, String description) {
         this.name = name;
-        id = count.incrementAndGet();
         images = new ArrayList<>();
 
         this.description = description;
@@ -46,7 +47,6 @@ public class Route {
     public int getId() {
         return id;
     }
-
     public void setId(@NotNull int id) {
         this.id = id;
     }

@@ -7,4 +7,7 @@
     <string name="add_party">Добавить новое мероприятие</string>
     <string name="party_images">Фотографии мероприятия</string>
     <string name="description">Описание:</string>
+    <integer name="com_vk_sdk_AppId">7973432</integer>
+    <string name="title_dashboard">Лента новостей</string>
+    <string name="title_home">Маршруты</string>
 </resources>

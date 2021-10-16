@@ -10,4 +10,10 @@ public class News {
 
     @SerializedName("body")
     private String text;
+
+    public long getUnixseconds() {
+        return unixseconds;
+    }
+
+    private long unixseconds;
 }

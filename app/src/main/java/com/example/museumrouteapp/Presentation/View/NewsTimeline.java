@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.museumrouteapp.Domain.Model.News;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.NetworkClient;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.VkApi;
 import com.example.museumrouteapp.R;
@@ -24,8 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NewsTimeline extends Fragment {
     private NewsTimelineBinding mBinding;
 
-    public NewsTimeline() {
-    }
+
 
     public static NewsTimeline newInstance() {
         return new NewsTimeline();
@@ -35,40 +33,40 @@ public class NewsTimeline extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = NewsTimelineBinding.inflate(getLayoutInflater(), container, false);
-      //  private void getResponse()  {
-            //Retrofit retrofit = NetworkClient.getRetrofitClient();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.vk.com/method/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        mBinding.textView.setText("lol");
 
+        //private void getresponse() throws IOException {
+          //  Retrofit retrofit = NetworkClient.getRetrofitClient();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.vk.com/")
+                .addConverterFactory(GsonConverterFactory.create()) // Convertor library used to convert response into POJO
+                .build();
             VkApi VkApi = retrofit.create(VkApi.class);
-            Call<String> call = VkApi.getresponse("-39575430", "1", "1", "5.131", "162dc14d76ab3a6dec41d09b0a41b0eef716f47d25cf161219bd9ad18f2d7356fe4de37bb25fd0a19e7b4");
+            Call<String> call = VkApi.getresponse("-39575430", "0", "1", "5.131", "162dc14d76ab3a6dec41d09b0a41b0eef716f47d25cf161219bd9ad18f2d7356fe4de37bb25fd0a19e7b4");
             call.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
+                    if(!response.isSuccessful()){
+                        mBinding.textView.setText("Code"+response.code());
+                        return;
+                    }
                     if (response.isSuccessful()){
-                      if (response.body() !=null){
-                            System.out.println("onSuccess - " +response.body().toString());
+                        if (response.body() !=null){
                             String jsonresponse = response.body().toString();
                             mBinding.textView.setText(jsonresponse);
 
                         } else {
-                         System.out.println("not Success"); }
-
-                 /*  String text = response.body();
-                   News news = new News();
-                   String content = "";
-                    content += content += "Text" + news.getText();
-                    mBinding.textView.append(content);*/
+                            System.out.println("not Success");
+                        }
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    mBinding.textView.setText(t.getMessage());
                 }
             });
-        //}
+      //  }
         return mBinding.getRoot();
     }
 }

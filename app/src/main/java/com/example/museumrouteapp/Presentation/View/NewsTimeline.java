@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.museumrouteapp.Presentation.Repository.ApiWork.NetworkClient;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.VkApi;
 import com.example.museumrouteapp.R;
 import com.example.museumrouteapp.databinding.NewsTimelineBinding;
@@ -31,9 +32,8 @@ public class NewsTimeline extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.news_timeline, container, false);
         mBinding = NewsTimelineBinding.inflate(getLayoutInflater(), container, false);
-        private void getresponse() throws IOException {
+      //  private void getResponse()  {
             Retrofit retrofit = NetworkClient.getRetrofitClient();
             VkApi VkApi = retrofit.create(VkApi.class);
             Call<String> call = VkApi.getresponse("-39575430", "2", "1", "5.131", "THIS_IS_SECRET_DATA");
@@ -57,6 +57,7 @@ public class NewsTimeline extends Fragment {
 
                 }
             });
-        }
+        //}
+        return mBinding.getRoot();
     }
 }

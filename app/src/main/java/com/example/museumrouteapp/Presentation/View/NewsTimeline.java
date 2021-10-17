@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.museumrouteapp.Domain.Model.Items;
 import com.example.museumrouteapp.Domain.Model.News;
+import com.example.museumrouteapp.Domain.Model.News;
+import com.example.museumrouteapp.Domain.Model.Response2;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.NetworkClient;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.VkApi;
 import com.example.museumrouteapp.databinding.NewsTimelineBinding;
@@ -43,10 +45,10 @@ public class NewsTimeline extends Fragment {
         //private void getresponse() throws IOException {
         Retrofit retrofit = NetworkClient.getRetrofitClient();
             VkApi VkApi = retrofit.create(VkApi.class);
-            Call<Items> call = VkApi.getresponse("-39575430", "0", "1", "5.131", "162dc14d76ab3a6dec41d09b0a41b0eef716f47d25cf161219bd9ad18f2d7356fe4de37bb25fd0a19e7b4");
-            call.enqueue(new Callback<Items> () {
+            Call<Response2> call = VkApi.getresponse("-39575430", "1", "1", "5.131","0", "162dc14d76ab3a6dec41d09b0a41b0eef716f47d25cf161219bd9ad18f2d7356fe4de37bb25fd0a19e7b4");
+            call.enqueue(new Callback<Response2> () {
                 @Override
-                public void onResponse(Call <Items>  call, Response<Items>  response) {
+                public void onResponse(Call <Response2>  call, Response<Response2>  response) {
                     if(!response.isSuccessful()){
                         mBinding.textView.setText("Code"+response.code());
                         return;
@@ -63,18 +65,18 @@ public class NewsTimeline extends Fragment {
                        // Date date = new java.util.Date(unixSeconds*1000L);
                         SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
                         //String formattedDate = sdf.format(date);
-                      Items items = response.body();
+                      Response2 news = response.body();
                         //for (News news : items) {
                            String content = "";
 //                            content += content += "Дата:" + news.getItems().getDate();
-                            content += content += "Пост сообщества:" + items.getText();
-                           mBinding.textView.append(content);
+                           // content += content += "Пост сообщества: " + news.getCount();
+                           mBinding.textView.setText(String.valueOf(news.getCount()));
                         //}
                     }
                 }
 
                 @Override
-                public void onFailure(Call <Items>  call, Throwable t) {
+                public void onFailure(Call <Response2>  call, Throwable t) {
                     mBinding.textView.setText(t.getMessage());
                 }
             });

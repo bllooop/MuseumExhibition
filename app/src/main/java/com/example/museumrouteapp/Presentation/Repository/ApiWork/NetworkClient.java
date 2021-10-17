@@ -16,7 +16,7 @@ public class NetworkClient {
     {
 
         retrofit = new Retrofit.Builder()
-                    .baseUrl("http://api.vk.com/method/")
+                    .baseUrl("https://api.vk.com/")
                     .addConverterFactory(GsonConverterFactory.create()) // Convertor library used to convert response into POJO
                     .build();
 

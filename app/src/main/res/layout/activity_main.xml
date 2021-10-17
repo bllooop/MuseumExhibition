@@ -10,18 +10,35 @@
     android:background="@color/mainLight"
     tools:context=".MainActivity">
 
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabCradleMargin="8dp"
+            app:fabCradleVerticalOffset="10dp"
+            app:fabCradleRoundedCornerRadius="20dp"
+            android:layout_gravity="bottom"
+            android:background="@color/bottomview"
+            >
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_anchor="@id/nav_view"
-        />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="10dp"
+                app:menu="@menu/menu"
+                android:layout_gravity="bottom"
+                app:fabAlignmentMode="center"
+                app:elevation="0dp"
 
- <androidx.fragment.app.FragmentContainerView
 
-    android:id="@+id/nav_host_fragment"
+                />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+    <androidx.fragment.app.FragmentContainerView
+
+        android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
 
         android:layout_width="match_parent"
@@ -30,19 +47,14 @@
 
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/bottomview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/menu"
-        android:layout_gravity="bottom"
-        app:fabAlignmentMode="center"
+        app:layout_anchor="@id/bottomAppBar"
         />
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

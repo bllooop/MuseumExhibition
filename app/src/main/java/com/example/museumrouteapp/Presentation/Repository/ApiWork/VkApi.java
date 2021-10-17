@@ -14,5 +14,6 @@ public interface VkApi {
     @GET("method/wall.get")
     Call<News> getresponse (@Query("owner_id") String OWNER_ID,
                                   @Query("offset") String OFFSET, @Query("count") String COUNT,
-                                  @Query("v") String version, @Query("extended") String extended, @Query("access_token") String access_token);
+                                  @Query("v") String version, @Query("extended") String extended,
+                                  @Query("access_token") String access_token);
 }

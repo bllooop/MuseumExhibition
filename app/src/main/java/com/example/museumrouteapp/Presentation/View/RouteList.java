@@ -44,6 +44,7 @@ public class RouteList extends Fragment {
         mBinding = RouteListFragmentBinding.inflate(getLayoutInflater(), container, false);
 
         mBinding.routeListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        ((MainActivity) getActivity()).mBinding.fab.setVisibility(View.VISIBLE);
 
         ((MainActivity) getActivity()).mBinding.fab.setImageResource(R.drawable.add);
         ((MainActivity) getActivity()).mBinding.fab.setOnClickListener((View v) -> {

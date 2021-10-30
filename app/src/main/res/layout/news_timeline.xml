@@ -11,21 +11,11 @@
     >
 
 
-    <EditText
-        android:id="@+id/news_size"
-        android:layout_width="281dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Добавьте количество постов"
-        android:inputType="text"
-        app:layout_anchorGravity="top|center" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:text="Показать"
-        app:layout_anchor="@id/news_size"
         app:layout_anchorGravity="bottom|right" />
 
     <ScrollView

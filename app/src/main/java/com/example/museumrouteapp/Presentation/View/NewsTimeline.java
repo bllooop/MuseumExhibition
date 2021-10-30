@@ -7,15 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.museumrouteapp.Domain.Model.JsonObjectsPath.Item;
 import com.example.museumrouteapp.Domain.Model.JsonObjectsPath.News;
+import com.example.museumrouteapp.Domain.Model.Route;
 import com.example.museumrouteapp.MainActivity;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.NetworkClient;
 import com.example.museumrouteapp.Presentation.Repository.ApiWork.VkApi;
 import com.example.museumrouteapp.Presentation.View.Adapters.NewsListAdapter;
+import com.example.museumrouteapp.Presentation.View.Adapters.RouteListAdapter;
+import com.example.museumrouteapp.Presentation.ViewModel.NewsListViewModel;
+import com.example.museumrouteapp.Presentation.ViewModel.RouteListViewModel;
 import com.example.museumrouteapp.R;
 import com.example.museumrouteapp.databinding.NewsTimelineBinding;
 
@@ -30,7 +38,7 @@ import retrofit2.Retrofit;
 
 public class NewsTimeline extends Fragment {
     private NewsTimelineBinding mBinding;
-    public String Nsize;
+    private NewsListViewModel mViewModel;
 
 
     public static NewsTimeline newInstance() {
@@ -42,39 +50,23 @@ public class NewsTimeline extends Fragment {
                              Bundle savedInstanceState) {
         mBinding = NewsTimelineBinding.inflate(getLayoutInflater(), container, false);
         mBinding.routeListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-            ((MainActivity) getActivity()).mBinding.fab.setVisibility(View.GONE);
-        mBinding.button.setOnClickListener((View v) -> {
-            if (!mBinding.newsSize.getText().toString().isEmpty()) {
-                Nsize = mBinding.newsSize.getText().toString();
-                Retrofit retrofit = NetworkClient.getRetrofitClient();
-                VkApi VkApi = retrofit.create(VkApi.class);
-                mBinding.button.setVisibility(View.GONE);
-                Call<News> call = VkApi.getresponse("-39575430", "0", Nsize, "5.131", "0", "162dc14d76ab3a6dec41d09b0a41b0eef716f47d25cf161219bd9ad18f2d7356fe4de37bb25fd0a19e7b4");
-                call.enqueue(new Callback<News>() {
-                    @Override
-                    public void onResponse(Call<News> call, Response<News> response) {
-                        if (!response.isSuccessful()) {
-                            mBinding.textView.setText("Code" + response.code());
-                            return;
-                        }
-                        if (response.isSuccessful()) {
-                            mBinding.newsSize.setVisibility(View.GONE);
-                            News item = response.body();
-                            NewsListAdapter adapter = new NewsListAdapter(item, Integer.valueOf(Nsize));
-                            mBinding.routeListRecycler.setAdapter(adapter);
-                            // mBinding.textView.append(content);
-                            // }
-                        }
-                    }
+        ((MainActivity) getActivity()).mBinding.fab.setVisibility(View.GONE);
+        return mBinding.getRoot();
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+       mBinding.button.setOnClickListener((View v) -> {
 
-                    @Override
-                    public void onFailure(Call<News> call, Throwable t) {
-                        mBinding.textView.setText(t.getMessage());
-                    }
-                });
-            }
+               mBinding.button.setVisibility(View.GONE);
+
+        mViewModel = new ViewModelProvider(this).get(NewsListViewModel.class);
+        mViewModel.getNewsList().observe(getViewLifecycleOwner(), v1 ->{
+            NewsListAdapter adapter = new NewsListAdapter(v1, 30);
+            mBinding.routeListRecycler.setAdapter(adapter);
         });
 
-        return mBinding.getRoot();
+        });
+
     }
 }

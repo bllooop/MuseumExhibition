@@ -35,9 +35,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         holder.binding.newsName.setText(data.getResponse().getItems().get(position).getText());
     }
 
+
     @Override
     public int getItemCount() {
-        return size;
+
+            return size;
+
     }
 
     public News getData() {

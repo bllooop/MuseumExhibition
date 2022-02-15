@@ -34,7 +34,7 @@ public class NetworkClient {
 
     public LiveData<News> getNewsListFromVk() {
         MutableLiveData<News> newss = new MutableLiveData<>();
-        Call<News> call = api.getresponse("-39575430", "0", "30", "5.131", "0", "e8921028e8921028e89210286ce8ebba10ee892e892102889f743c75e521f933ea85521");
+        Call<News> call = api.getresponse("-39575430", "0", "30", "5.131", "0", "service key");
                 call.enqueue(new Callback<News>() {
                     @Override
                     public void onResponse(Call<News> call, Response<News> response) {
